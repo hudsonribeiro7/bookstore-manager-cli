@@ -6,4 +6,5 @@ export interface Book {
   authorId: number;
   available: boolean;
   author?: Author;
+  authorName?: string;
 }

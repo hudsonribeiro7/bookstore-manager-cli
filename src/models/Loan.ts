@@ -4,4 +4,6 @@ export interface Loan {
   clientId: number;
   loanDate?: Date;
   returnDate?: Date | null;
+  bookTitle?: string;
+  clientName?: string;
 }

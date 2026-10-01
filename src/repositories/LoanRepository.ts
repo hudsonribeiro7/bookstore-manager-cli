@@ -62,4 +62,30 @@ export class LoanRepository {
 
     return result.rows;
   }
+    async returnBook(loanId: number): Promise<void> {
+    const loan = await pool.query(
+      `SELECT book_id
+       FROM loans
+       WHERE id = $1 AND return_date IS NULL`,
+      [loanId]
+    );
+
+    if (loan.rows.length === 0) {
+      throw new Error("Empréstimo ativo não encontrado.");
+    }
+
+    const bookId = loan.rows[0].book_id;
+
+    await pool.query(
+      `UPDATE loans
+       SET return_date = CURRENT_TIMESTAMP
+       WHERE id = $1`,
+      [loanId]
+    );
+
+    await pool.query(
+      "UPDATE books SET available = TRUE WHERE id = $1",
+      [bookId]
+    );
+  }
 }

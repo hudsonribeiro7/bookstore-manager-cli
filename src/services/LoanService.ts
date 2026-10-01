@@ -15,4 +15,11 @@ export class LoanService {
   async findAll(): Promise<Loan[]> {
     return this.repository.findAll();
   }
+    async returnBook(loanId: number): Promise<void> {
+    if (loanId <= 0) {
+      throw new Error("ID do empréstimo inválido.");
+    }
+
+    await this.repository.returnBook(loanId);
+  }
 }

@@ -1,7 +1,7 @@
-import { AuthorMenu } from "./menus/AuthorMenu";
+import { MainMenu } from "./menus/MainMenu";
 
 async function main(): Promise<void> {
-  const menu = new AuthorMenu();
+  const menu = new MainMenu();
 
   await menu.start();
 }
